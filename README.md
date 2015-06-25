@@ -13,15 +13,18 @@ As Ogar is written in Node.js, you must have Node.js and its "ws" module install
 ```
 
 Currently, Ogar listens on the following addresses and ports:
-* *:80 - for the master server
+* *:88 - for the master server
 * *:443 - for the game server
 
 Please note that on some systems, you may have to run the process as root or otherwise elevate your privileges to allow the process to listen on the needed ports. **If you are getting an EADDRINUSE error, it means that the port required to run Ogar is being used. Usuallly, Skpye is the culprit. To solve this, either close out skype, or change the serverPort value in gameserver.ini to a different port. You will have to change your connection ip to "127.0.0.1:PORT"**
 
-Once the game server is running, you can connect (locally) by going to the agar.io website. Once the game is loaded, in your address bar, replace *agar.io* with *javascript:connect("ws://127.0.0.1:443")* and press enter.
+Once the game server is running, you can connect (locally) by going to the agar.io website. Once the game is loaded, in your address bar, replace *agar.io* with *javascript:connect("ws://127.0.0.1:443","")* and press enter.
 
 ## Configuring Ogar
 Use "gameserver.ini" to modify Ogar's configurations field. Playerbots are currently basic and for testing purposes. To use them, change "serverBots" to a value higher than zero in the configuration file. To add/remove bot names, edit the file named "botnames.txt" which is in the same folder as "gameserver.ini". Names should be separated by using the enter key.
+
+## The Master Server
+The master server is able to host many servers in 1 console, show clients the amount of connected players, create/remove them on the fly, and allow users to switch between game servers without the need to type in an IP. To start the master server, you will need to obtain a copy of the client files. Once you do, open up main_out.js and find/replace: ```aa + 'm.agar.io'``` with ```http://127.0.0.1:88``` (The ip/port of your master server) and ```aa + 'm.agar.io/info'``` with ```http://127.0.0.1:88/info``` (the info server). To add/remove default regions, you will have to edit the "regions" value in the masterserver.ini file. Alternatively, you can use the console commands to add servers to the master server list.
 
 ## Custom Game modes
 Ogar has support for custom game modes. To switch between game modes, change the value of "serverGamemode" in the configurations file to the selected game mode id and restart the server. The current supported game modes are:
